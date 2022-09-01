@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>와! 장고!</h1>
+<p>쉬는 시간 주세요!</p>
+<a href="{% url 'articles:greeting' %}">dtl로 이동</a>
+{% comment %} <a href="{% url 'dinner' %}">dinner</a> {% endcomment %}
+<a href="{% url 'articles:throw' %}">throw</a>
+<a href="{% url 'pages:index' %}">두번째 앱의 인덱스로 고고!</a>
+
+{% comment %} 앞의 /가 붙으면 로컬 호스트를 기준으로 이동하고 /가 없으면 내
+기준으로 이동한다. {% endcomment %} {% endblock content %}

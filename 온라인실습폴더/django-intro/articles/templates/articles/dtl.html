@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <h1>dtl</h1>
+  <p>{{name}}의 나이는 {{age}}야!</p> 
+  <p>{{name|lower|truncatechars:5}}의 나이는 {{age}}야!</p>
+  {% comment %} 
+  <p>{{foods.0}}</p>
+  <p>{{foods.1}}</p>
+  <p>{{foods.2}}</p>
+  이 코드랑 아래 for문 돌린 코드랑 똑같은 것.
+   {% endcomment %}
+  {% for food in foods  %}
+    <p>{{food}}</p>
+  {% endfor %}
+
+  {% comment %} if문 사용 하기. {% endcomment %}
+  {% if age %}
+    <p>{{age}}</p>  
+  {% else %}
+    <p>나이 없음</p>
+  {% endif %}
+
+{% endblock content %}

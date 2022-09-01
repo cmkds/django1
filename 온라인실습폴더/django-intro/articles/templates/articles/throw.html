@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+
+<form action="/catch/" method="GET">
+  <label for="search">search: </label>
+  {% comment %} label의 for과 input의 id를 연결한다. {% endcomment %}
+  <input type="text" name="search" id="search" />
+  <input type="submit" />
+</form>
+{% comment %}
+<form action="https://search.naver.com/search.naver">
+  <input type="text" name="query" />
+  <input type="submit" />
+</form>
+{% endcomment %} {% endblock content %}

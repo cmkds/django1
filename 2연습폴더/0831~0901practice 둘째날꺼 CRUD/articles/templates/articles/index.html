@@ -2,12 +2,17 @@
 
 {% block content %}
 
+
   <h1>Articles</h1>
+
+  <a href="{% url 'articles:new'%}"> 글 작성하기</a>
   <hr>
   {% for article in articles  %}
   <p>글번호 : {{article.pk}}</p>
   <p>글제목 : {{article.title}}</p>
   <p>글내용 : {{article.content}}</p>
+
+  <a href="{% url 'articles:detail' article.pk%}"> 내용 보기</a>
   <hr>
   {% endfor %}
 

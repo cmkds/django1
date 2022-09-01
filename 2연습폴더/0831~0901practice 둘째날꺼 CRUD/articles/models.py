@@ -8,5 +8,5 @@ class Article(models.Model):  ##django.db.modles 모듈의 Model 클래스를 �
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-def __str__(self):
-    return self.title
+    def __str__(self):
+        return self.title

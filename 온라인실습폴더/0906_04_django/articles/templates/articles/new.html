@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>NEW</h1>
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+
+    {{form.as_p}}  
+
+{% comment %} form 클래스를 작성하는것만으로 사용자입력을 줄일 수 있따. 
+단점 줄나눔이 안되어있다. input태그로 되어있다.
+.as_p 메소드를 사용하면 요소끼리 줄 바꿈이 된다. {% endcomment %}
+    {% comment %} <label for="title">Title: </label>
+    <input type="text" name="title" id="title"><br>
+    <label for="content">Content: </label>
+    <textarea name="content" id="content"></textarea><br> {% endcomment %}
+
+    <input type="submit">
+  </form>
+  <hr>
+  <a href="{% url 'articles:index' %}">뒤로가기</a>
+{% endblock content %}

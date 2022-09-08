@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-# from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -16,12 +15,12 @@ def login(request):
         return redirect('articles:index')
 
     if request.method =='POST':
-        form = CustomUserCreationForm(request, request.POST)
+        form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect(request.Get.get('next') or 'articles:index')
+            return redirect(request.GET.get('next') or 'articles:index')
     else:
-        form = CustomUserCreationForm()
+        form = AuthenticationForm()
     context = {
         'form' : form
     }
@@ -29,10 +28,11 @@ def login(request):
 
 @require_POST
 def logout(request):
-    auth_logout(request)
+    if request.user.is_authenticated:
+        auth_logout(request)
     return redirect('articles:index')
 
-
+@require_http_methods(['GET', 'POST'])
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -47,9 +47,11 @@ def signup(request):
     }
     return render(request, 'accounts/signup.html', context)
 
+@require_POST
 def delete(request):
-    request.user.delete()
-    auth_logout(request)
+    if request.user.is_authenticated:
+        request.user.delete()
+        auth_logout(request)
     return redirect('articles:index')
 
 @login_required
@@ -75,7 +77,7 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return redirect('articles: index')
+            return redirect('articles:index')
     else:
         form = PasswordChangeForm(request.user)
     context = {

@@ -49,10 +49,10 @@ def detail(request, pk):
     }
     return render(request, 'articles/detail.html', context)
 
-@login_required
+# @login_required
 @require_POST
 def delete(request, pk):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated: ####### @login_required 대신 사용
         article = Article.objects.get(pk=pk)
         article.delete()
     return redirect('articles:index')

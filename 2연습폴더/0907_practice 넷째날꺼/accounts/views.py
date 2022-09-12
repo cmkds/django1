@@ -7,7 +7,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_http_methods
 
-# Create your views here.
+# Create your views here. 
 
 @require_http_methods(['GET','POST'])
 def login(request):
@@ -28,7 +28,7 @@ def login(request):
 
 @require_POST
 def logout(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated:  
         auth_logout(request)
     return redirect('articles:index')
 

@@ -1,3 +1,4 @@
+from xml.etree.ElementTree import Comment
 from rest_framework import serializers
 from .models import Article, Comment
 
@@ -16,7 +17,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     
-    comment_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)  ##댓글 번호만 보여주기
+    # comment_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)  ##댓글 번호만 보여주기
     comment_set = CommentSerializer(many=True, read_only=True)               ## 댓글 내용 전부 보여주기.
 
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)

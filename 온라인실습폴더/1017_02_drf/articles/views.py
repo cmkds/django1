@@ -79,9 +79,9 @@ def comment_detail(request, comment_pk):
 @api_view(['POST'])
 def comment_create(request, article_pk):
     # article = Article.objects.get(pk=article_pk)
-    article = get_object_or_404(Article, pk=article_pk)
+    article = get_object_or_404(Article, pk=article_pk) ########### 밑의 save할때 넣어주기 위해 article변수를 가져옴.
     serializer = CommentSerializer(data=request.data)
 
     if serializer.is_valid(raise_exception=True):
-        serializer.save(article=article) #commit=False가 안쓰이고 이게 바로 쓰임
+        serializer.save(article=article) ####### 1:N 에서 사용commit=False가 안쓰이고 이게 바로 쓰임
         return Response(serializer.data, status=status.HTTP_201_CREATED)
